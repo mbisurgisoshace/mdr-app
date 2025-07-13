@@ -13,3 +13,26 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model FormularioOrganizacion {
+  id        Int      @id @default(autoincrement())
+  orgId     String
+  formId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([orgId, formId])
+  @@map("FormularioOrganizacion")
+}
+
+model FormularioPresentado {
+  id           Int      @id @default(autoincrement())
+  orgId        String
+  formId       String
+  submissionId String
+  procesado    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("FormulariosPresentados")
+}
